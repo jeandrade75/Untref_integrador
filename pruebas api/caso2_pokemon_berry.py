@@ -1,34 +1,30 @@
-import unittest
 import requests
-
-# Definir las URLs base
-URL_BERRY_1 = "https://pokeapi.co/api/v2/berry/1/"
-URL_BERRY_2 = "https://pokeapi.co/api/v2/berry/2/"
+import unittest
 
 class TestPokeApiBerry2(unittest.TestCase):
-    
-    def setUp(self):
-        # Hacer GET requests para berry/1 y berry/2 y guardar las respuestas
-        self.response_berry_1 = requests.get(URL_BERRY_1)
-        self.data_berry_1 = self.response_berry_1.json()
 
-        self.response_berry_2 = requests.get(URL_BERRY_2)
-        self.data_berry_2 = self.response_berry_2.json()
+    def setUp(self) -> None:
+        self.url = 'https://pokeapi.co/api/v2/berry/2'
 
-    # Caso 2: Test para berry/2
-    def test_berry_2_status_code(self):
-        self.assertEqual(self.response_berry_2.status_code, 200, f"Error: Status code {self.response_berry_2.status_code}")
-    
-    def test_berry_2_firmness_name(self):
-        self.assertEqual(self.data_berry_2["firmness"]["name"], "super-hard", f"Error: Expected firmness name 'super-hard', but got {self.data_berry_2['firmness']['name']}")
-    
-    def test_berry_2_size(self):
-        # Verificar que el size de berry/2 sea mayor que el de berry/1
-        self.assertGreater(self.data_berry_2["size"], self.data_berry_1["size"], f"Error: Expected berry/2 size to be greater than berry/1, but got {self.data_berry_2['size']} <= {self.data_berry_1['size']}")
-    
-    def test_berry_2_soil_dryness(self):
-        # Verificar que el soil_dryness de berry/2 sea igual al de berry/1
-        self.assertEqual(self.data_berry_2["soil_dryness"], self.data_berry_1["soil_dryness"], f"Error: Expected soil_dryness to be the same as berry/1, but got {self.data_berry_2['soil_dryness']}")
+    def test_berry_data(self):
+        # Hacer la solicitud GET
+        response = requests.get(self.url)
+        
+        # Verificar que la solicitud sea exitosa
+        self.assertEqual(response.status_code, 200)
+        
+        # Convertir la respuesta a JSON
+        berry_data = response.json()
+        
+        # Verificar que en firmness, el nombre (name) sea "super-hard"
+        self.assertEqual(berry_data['firmness']['name'], 'super-hard')
+        
+        # Verificar que el tamaño (size) sea mayor a 20
+        self.assertGreater(berry_data['size'], 20)
+        
+        # Verificar que soil_dryness sea 15
+        self.assertEqual(berry_data['soil_dryness'], 15)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
+

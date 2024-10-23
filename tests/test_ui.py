@@ -25,7 +25,7 @@ class SauceDemoTests(unittest.TestCase):
         """Caso 1: Ordenar los productos por precio (bajo a alto) y verificar el orden"""
         driver = self.driver
         select = Select(driver.find_element(By.CLASS_NAME, "product_sort_container"))
-        select.select_by_value("lohi")  # Ordenar de bajo a alto
+        select.select_by_value("lohi")  # Ordenar de bajo a alto (low to high)
         
         # Obtener los precios de los productos
         prices = driver.find_elements(By.CLASS_NAME, "inventory_item_price")
