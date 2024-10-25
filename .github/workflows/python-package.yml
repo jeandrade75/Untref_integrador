@@ -28,6 +28,10 @@ jobs:
                 python -m pip install --upgrade pip
                 pip install selenium python-dotenv requests html-testRunner unittest-xml-reporting
 
+            - name: Install Webdriver Manager
+                run: pip install webdriver-manager
+
+
             #- name: Set environment variables
               #run: echo "WEB_DATA=${{ secrets.WEB_DATA}}" >> $GITHUB_ENV
 
