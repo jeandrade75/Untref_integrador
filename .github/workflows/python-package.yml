@@ -29,7 +29,7 @@ jobs:
                 pip install selenium python-dotenv requests html-testRunner unittest-xml-reporting
 
             - name: Install Webdriver Manager
-                run: pip install webdriver-manager
+              run: pip install webdriver-manager
 
 
             #- name: Set environment variables
